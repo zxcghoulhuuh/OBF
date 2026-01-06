@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcanum v5.0.0 | Chimera Ghost</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes drift {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
+        }
+        @keyframes prismatic {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        @keyframes ghost-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ececec;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #0d0d12 0%, #000000 100%);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .ui-blur {
+            backdrop-filter: blur(60px) saturate(200%);
+            background: rgba(3, 3, 5, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .ghost-gradient {
+            background: linear-gradient(90deg, #fff 0%, #00f2fe 33%, #7000ff 66%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: drift 5s linear infinite;
+        }
+        .prismatic-glow {
+            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.4)) drop-shadow(0 0 20px rgba(112, 0, 255, 0.2));
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .no-copy-zone {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #00f2fe, #7000ff);
+        }
+        .spectral-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: 
+                radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 242, 254, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-card {
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .prismatic-anim {
+            animation: prismatic 10s linear infinite;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body onmousemove="document.body.style.setProperty('--mouse-x', event.clientX + 'px'); document.body.style.setProperty('--mouse-y', event.clientY + 'px');">
+    <div class="spectral-overlay"></div>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
